@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.youquan.admin.product.mapper.ProductMapper">
+    <insert id="insert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        <!--<selectKey keyProperty="id" resultType="java.lang.Long">
+            select last_insert_id()
+        </selectKey>-->
+        INSERT INTO product
+        (
+        `name`,
+        insert_author,
+        update_author
+        )
+        VALUES
+        (
+        #{name},
+        #{user_id},
+        #{user_id}
+        );
+    </insert>
+
+    <insert id="insertCategory" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        <!--<selectKey keyProperty="id" resultType="java.lang.Long">
+            select last_insert_id()
+        </selectKey>-->
+        INSERT INTO product_category
+        (
+        product_id,
+        `name`,
+        content,
+        insert_author,
+        update_author
+        )
+        VALUES
+        (
+        #{product_id},
+        #{name},
+        #{content},
+        #{user_id},
+        #{user_id}
+        );
+    </insert>
+
+    <update id="updateProduct" parameterType="java.util.Map">
+        UPDATE product
+        <set>
+            update_time = now(),
+            <if test="name != null and name != ''">`name` = #{name},</if>
+            <if test="status != null and status != ''">`status` = #{status},</if>
+            <if test="update_author != null and update_author != ''">`update_author` = #{update_author},</if>
+        </set>
+	    WHERE id = #{id} ;
+    </update>
+
+    <update id="updateProductCategory" parameterType="java.util.Map">
+        UPDATE product_category
+        <set>
+            update_time = now(),
+            <if test="name != null and name != ''">`name` = #{name},</if>
+            <if test="status != null and status != ''">`status` = #{status},</if>
+            <if test="content != null and content != ''">`content` = #{content},</if>
+            <if test="product_id != null and product_id != ''">`product_id` = #{product_id},</if>
+            <if test="update_author != null and update_author != ''">`update_author` = #{update_author},</if>
+        </set>
+	    WHERE id = #{id} ;
+    </update>
+
+    <select id="listByProduct" parameterType="java.util.Map" resultMap="listByProductMap">
+        SELECT a.*,a.id ai, '0' as ss FROM product a
+        <where>
+            <if test="id != null and id != ''">and `id` = #{id}</if>
+            <if test="status != null and status != ''">and `status` = #{status}</if>
+            <if test="name != null and name != ''">and `name` = #{name}</if>
+        </where>
+    </select>
+
+    <resultMap id="listByProductMap" type="java.util.Map">
+        <association property="category_list" column="{product_id=ai,status=ss}" select="listByProductCategory"></association>
+    </resultMap>
+
+    <select id="listByProductCategory" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT a.* FROM product_category a
+        <where>
+            <if test="id != null and id != ''">and `id` = #{id}</if>
+            <if test="status != null and status != ''">and `status` = #{status}</if>
+            <if test="name != null and name != ''">and `name` = #{name}</if>
+            <if test="product_id != null and product_id != ''">and `product_id` = #{product_id}</if>
+        </where>
+    </select>
+
+
+</mapper>

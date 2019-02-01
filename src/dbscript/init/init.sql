@@ -66,6 +66,31 @@ CREATE TABLE `fault_feedback` (
    PRIMARY KEY (`id`)
  ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC COMMENT='故障反馈';
 
+CREATE TABLE `product` (
+   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+   `name` varchar(64) DEFAULT NULL COMMENT '产品名称',
+   `status` int(11) DEFAULT '0' COMMENT '0：有效，1：删除',
+   `insert_author` int(11) DEFAULT NULL,
+   `insert_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+   `update_author` int(11) DEFAULT NULL,
+   PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC COMMENT='产品';
+
+CREATE TABLE `product_category` (
+   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+   `product_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+   `name` varchar(64) DEFAULT NULL COMMENT '产品名称',
+   `content` varchar(256) DEFAULT NULL COMMENT '产品内容',
+   `status` int(11) DEFAULT '0' COMMENT '0：有效，1：删除',
+   `insert_author` int(11) DEFAULT NULL,
+   `insert_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+   `update_author` int(11) DEFAULT NULL,
+   PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC COMMENT='产品类目';
+
+
 
 
 

@@ -79,7 +79,7 @@ CREATE TABLE `product` (
 
 CREATE TABLE `product_category` (
    `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-   `product_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+   `product_id` int(11) NOT NULL COMMENT '主键',
    `name` varchar(64) DEFAULT NULL COMMENT '产品名称',
    `content` varchar(256) DEFAULT NULL COMMENT '产品内容',
    `status` int(11) DEFAULT '0' COMMENT '0：有效，1：删除',

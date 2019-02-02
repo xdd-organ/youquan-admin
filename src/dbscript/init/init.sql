@@ -90,6 +90,19 @@ CREATE TABLE `product_category` (
    PRIMARY KEY (`id`)
  ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC COMMENT='产品类目';
 
+CREATE TABLE `partner` (
+   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+   `name` varchar(32) DEFAULT NULL COMMENT '公司名称',
+   `content` varchar(256) DEFAULT NULL COMMENT '公司介绍',
+   `cover_url` varchar(256) DEFAULT NULL COMMENT '公司logo图片地址',
+   `domain` varchar(128) DEFAULT NULL COMMENT '公司网站地址',
+   `status` int(11) DEFAULT '0' COMMENT '0：有效，1：删除',
+   `insert_author` int(11) DEFAULT NULL,
+   `insert_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+   `update_author` int(11) DEFAULT NULL,
+   PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC COMMENT='代理品牌';
 
 
 

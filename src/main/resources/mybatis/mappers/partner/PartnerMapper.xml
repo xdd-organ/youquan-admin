@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.youquan.admin.partner.mapper.PartnerMapper">
+    <insert id="insert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        <!--<selectKey keyProperty="id" resultType="java.lang.Long">
+            select last_insert_id()
+        </selectKey>-->
+        INSERT INTO partner
+        (
+        `name`,
+        `content`,
+        `cover_url`,
+        `domain`,
+        insert_author,
+        update_author
+        )
+        VALUES
+        (
+        #{name},
+        #{content},
+        #{cover_url},
+        #{domain},
+        #{user_id},
+        #{user_id}
+        );
+    </insert>
+
+
+    <update id="updatePartner" parameterType="java.util.Map">
+        UPDATE partner
+        <set>
+            update_time = now(),
+            <if test="name != null and name != ''">`name` = #{name},</if>
+            <if test="content != null and content != ''">`content` = #{content},</if>
+            <if test="cover_url != null and cover_url != ''">`cover_url` = #{cover_url},</if>
+            <if test="domain != null and domain != ''">`domain` = #{domain},</if>
+            <if test="status != null and status != ''">`status` = #{status},</if>
+            <if test="update_author != null and update_author != ''">`update_author` = #{update_author},</if>
+        </set>
+	    WHERE id = #{id} ;
+    </update>
+
+    <select id="listByPartner" parameterType="java.util.Map" resultType="java.util.Map">
+        select a.* from partner a
+        <where>
+            <if test="name != null and name != ''">and a.name like concat('%',#{name},'%')</if>
+            <if test="domain != null and domain != ''">and a.domain like concat('%',#{domain},'%')</if>
+            <if test="status != null and status != ''">and a.status = #{status}</if>
+        </where>
+    </select>
+
+
+</mapper>
